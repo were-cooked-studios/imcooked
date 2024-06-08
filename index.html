@@ -6,24 +6,20 @@
     <title>Maheen Taher ICS4</title>
    
     <link href='https://fonts.googleapis.com/css?family=Borel' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Contrail One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Droid Serif' rel='stylesheet' rel='stylesheet'>
     <style>
         body {background-color: #665252;
             text-align: center;
             color: #ffffff;
-            font-family: 'Contrail One';
+            font-family: 'Droid Serif';
             font-size: 21px; 
             margin: 0;
             padding: 0;}
         header {color: #5465ff; }
         img {border: 1px solid #ffffff;}
-        h1 {font-size: clamp(1.875rem, 0.966rem + 4.55vw, 4.375rem); 
-            font-family: 'Borel';
-            background-color: white;
-            margin: 0;
-            padding: 0;}
+      
         h2 {font-size: clamp(0.625rem, 0.17rem + 2.27vw, 1.875rem);
-            font-family: 'Contrail One';}
+            font-family: 'Droid Serif';}
         footer {
             position: fixed;
             left: 0;
@@ -42,18 +38,32 @@
             justify-content: center;
         }
         .align {text-align: center;}
-            a:visited {color: rgb(50, 11, 158);}
-            a:link {color: rgb(50, 11, 158);}
-            a:active {color:red}
         .clipToRight {text-align: right;}
-        a:link, a:visited{
-            background-color: #f44336;
+        .button {
+            border: none;
             color: white;
-            padding: 15px 25px;
+            padding: 16px 32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            font-family: 'Droid Serif';
         }
+
+        .headerbutton {
+            background-color: #665252; 
+            color: #ffffff; 
+            border: 2px solid #ff877d;
+        }
+
+        .headerbutton:hover {
+            background-color: #ff877d;
+            color: #ffe492;
+        }
+        
     </style>
 
 </head>
@@ -62,17 +72,17 @@
 <body>
     <!-- Heading-->
     <header class="space">
-        <h1><a href="index.html">
+        <nav><a href="index.html">
             <img src="images/imcookedlogo.png" width="320" height="180" alt="Hyperlinked logo of our website that brings the user back to the home page">
-            </a></h1>
-        <h2> 
-            <a href="index.html">HOME</a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
-            <a href="aboutme.html">ABOUT ME</a> &nbsp &nbsp &nbsp &nbsp 
-            <a href="contactme.html">CONTACT ME</a>
-
-        </h2>
+            </a>
+            <h2> 
+            <a href="index.html"><button class = "button headerbutton">Home</button></a>&nbsp &nbsp &nbsp &nbsp &nbsp 
+            <a href="reciperoulette.html"><button class = "button headerbutton">Recipe Roulette</button></a> &nbsp &nbsp &nbsp &nbsp 
+            <a href="test.html"><button class = "button headerbutton">Cookbook Creation</button></a>
+        </nav>
     </header>
 
+    
     <div class="container">
         <a href="mywork.html">
         <img src="images/myWorkArduino.png" width="150" height="200" alt="Hyperlinked image that displays an arduino board project I worked on last year">
