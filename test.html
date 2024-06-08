@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .ingredient {
+            display: flex;
+            align-items: center;
+        }
+        .ingredient span {
+            margin-right: 10px;
+        }
+        .ingredient button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recipe Generator</h1>
+    <div id="fridge">
+        <h2>FRIDGE:</h2>
+        <ul id="ingredient-list"></ul>
+        <input type="text" id="new-ingredient" placeholder="Type a new ingredient you have and press enter...">
+    </div>
+    <button id="generate-recipes">Generate Recipes</button>
+    <h2>Recipes:</h2>
+    <ul id="recipe-list"></ul>
+
+    <script src="script.js"></script>
+</body>
+</html>
