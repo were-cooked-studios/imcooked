@@ -24,11 +24,11 @@
     cursor: pointer;
 }
 
-#recipes {
+#recipes, #additional-ingredients {
     margin-top: 20px;
 }
 
-.recipe {
+.recipe, .suggestion {
     cursor: pointer;
     color: blue;
     text-decoration: underline;
