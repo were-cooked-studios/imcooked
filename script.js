@@ -44,6 +44,10 @@ function updateIngredientList() {
         li.textContent = ingredient.toUpperCase();
         const button = document.createElement('button');
         button.textContent = 'X';
+
+        //szymon: this is an example on how to add classes, please add a class to the inner text of 
+        li.classList.add("lee");
+
         button.addEventListener('click', () => {
             ingredients.splice(index, 1);
             updateIngredientList();

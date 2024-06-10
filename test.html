@@ -17,6 +17,15 @@
             margin: 0;
             padding: 0;
         }
+
+
+        /* Add left padding and make lee just for the li's text so probably make a div or smthin 
+        .lee{
+            color: red;
+
+        }
+        */  
+
         header {
             color: #5465ff;
             width: 100%;
@@ -77,18 +86,20 @@
             margin: 20px auto;
         }
         .left, .right {
-            background-color: #4d3a3a;
             padding: 20px;
-            border: 2px solid #ff877d;
             border-radius: 10px;
             flex: 1;
             margin: 10px;
-            color: white;
+            
         }
         .left {
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
+            background-color: #4d3a3a;
+            border: 4px solid #ff877d;
+            color: white;
         }
         .left input {
             margin: 10px 0;
@@ -99,31 +110,31 @@
         }
         .left button {
             padding: 10px 20px;
-            background-color: white;
-            color: red;
+            background-color: #ffe78c;
+            color: #4d3a3a;
             font-size: 18px;
-            border: 1px solid #000;
+            border: 0px;
             cursor: pointer;
             margin-top: 10px;
         }
         .left ul {
             list-style: none;
-            padding: 0;
+            padding: 0px;
             width: 100%;
         }
         .left li {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 5px;
             background-color: #ff877d;
             margin: 5px 0;
-            border: 1px solid white;
             border-radius: 5px;
         }
         .left li button {
             background: none;
             border: none;
-            color: rgb(0, 0, 0);
+            color: rgb(116, 73, 73);
             font-weight: bold;
             cursor: pointer;
         }
@@ -131,6 +142,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            background-color: #d3d3d3;
+            border: 4px solid #000000;
+            color: black;
         }
         .recipe, .suggestion {
             background-color: white;
@@ -217,14 +231,16 @@
 
     <div class="main-container">
         <div class="left">
-            <ul id="ingredient-list"></ul>
             <input type="text" id="new-ingredient" placeholder="Add an ingredient">
             <button id="generate-recipes">Generate Recipes</button>
+            <ul id="ingredient-list"></ul>
+            
         </div>
         <div class="right">
+            <div id="recipe-instructions"></div>
             <div id="recipes"></div>
             <div id="additional-ingredients"></div>
-            <div id="recipe-instructions"></div>
+            
         </div>
     </div>
 
