@@ -3,46 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Max Koenigs ICS4U</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Maheen Taher ICS4</title>
+   
+    <link href='https://fonts.googleapis.com/css?family=Borel' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Droid Serif' rel='stylesheet' rel='stylesheet'>
+    <style>
+        body {background-color: #665252;
+            text-align: center;
+            color: #ffffff;
+            font-family: 'Droid Serif';
+            font-size: 21px; 
+            margin: 0;
+            padding: 0;}
+        header {color: #5465ff; }
+        img {border: 1px solid #ffffff;}
+      
+        h2 {font-size: clamp(0.625rem, 0.17rem + 2.27vw, 1.875rem);
+            font-family: 'Droid Serif';}
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #5465ff;
+            color: white;
+            text-align: center;
+            padding: 10px 0; /* Adjust padding as needed */
+            font-size: 18px;}
+        .small {font-size: 30px}
+        .space {line-height:60%;}
+        .container {
+            display: flex; /* Use flexbox layout */
+            align-items: center; /* Center items vertically */;
+            justify-content: center;
+        }
+        .align {text-align: center;}
+        .clipToRight {text-align: right;}
+        .button {
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            font-family: 'Droid Serif';
+        }
+
+        .headerbutton {
+            background-color: #665252; 
+            color: #ffffff; 
+            border: 2px solid #ff877d;
+        }
+
+        .headerbutton:hover {
+            background-color: #ff877d;
+            color: #ffe492;
+        }
+        
+    </style>
+
 </head>
+
+
 <body>
-    <header>
-        <h1>Maximilian Koenigs</h1>
-        <h2>My Personal Web App</h2>
+    <!-- Heading-->
+    <header class="space">
+        <nav><a href="index.html">
+            <img src="images/imcookedlogo.png" width="320" height="180" alt="Hyperlinked logo of our website that brings the user back to the home page">
+            </a>
+            <h2> 
+            <a href="index.html"><button class = "button headerbutton">Home</button></a>&nbsp &nbsp &nbsp &nbsp &nbsp 
+            <a href="reciperoulette.html"><button class = "button headerbutton">Recipe Roulette</button></a> &nbsp &nbsp &nbsp &nbsp 
+            <a href="test.html"><button class = "button headerbutton">Cookbook Creation</button></a>
+        </nav>
     </header>
-    <section id="about-me">
-        <h3>About Me</h3>
-        <p>My name is Max and im a tech freak!!! I love technology and it really fasinates me. I have the future in my hands!!! My future in tech is to be able to do something with the knowledge that I will gain. In tech I would like to have a job somewhere related to computer Science</p>
-        <style>
-.Me {
-  width: 200px;
-  height: 200px;
-}
-</style>
-<img src="https://cdn.discordapp.com/attachments/863220642186526722/1211483169992347779/IMG_6746.jpg?ex=65ee5c9f&is=65dbe79f&hm=e25191caaef14afea60d8bd1feeb5a55c855014f14037fa969f291b4935c7cb7&" class="Me" alt="Photo of me">
-    </section>
-    <section id="my-work">
-        <h3>My Beautiful Work</h3>
-        <p>I haven't really had many experiences with tech outside of school but during school I've had lots of fun. My most memorable project was last year and I was tasked to design a phone holding lock system</p>
-        <div class="work-item">
-            <style>
-            .project {
-                    width: 200px;
-                    height: 200px;   
-                }
-            </style>
-            <img src="https://cdn.discordapp.com/attachments/863220748307136545/1102673543176671242/IMG_6243.jpg?ex=65e61cc3&is=65d3a7c3&hm=7b1ea25606a6de97d95d1df77ab5556399e8e3b16321ae33f4cdbc15a930d269&" class= "project" alt="My phone locking system adrduino ">
-            <p>This project was tasked by me and Maheen. This project was to create a box with a padlock that would hold childrens phones.</p>
-            <a href="https://github.com/MaxKnowsAll/MMJarduino">Github link to project</a>
-        </div>
-    </section>
-    <!-- Footer -->
-<div class="w3-container w3-blue">
-    <h5>Contact</h5>
-    <p>Created by K.Max</p>
-    <p>Maximilian.koenigs@student.tdsb.on.ca</p>
-    <p>Feb 25 2024</p>
-</div>
-</body>
-</html>
+
+    
+    <div class="container">
+        <a href="mywork.html">
+        <img src="images/myWorkArduino.png" width="150" height="200" alt="Hyperlinked image that displays an arduino board project I worked on last year">
+        </a>
+        <p> &nbsp &nbsp &nbsp</p>
+        
+        <img src="images/IMG_1160 (1).png" width="300" height="400" alt="An image of me, Maheen Taher"> 
+        <p> &nbsp &nbsp &nbsp</p> 
+
+        <a href="mymusic.html">
+        <img src="images/myMusicImage.png" width="150" height="200" alt="Hyperlinked image that displays a picture of the software I use to write my music">
+        </a> 
+    </div>
+
+    <div>
+... (13 lines left)
