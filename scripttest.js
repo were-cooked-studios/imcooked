@@ -68,7 +68,7 @@ document.getElementById('generate-recipes').addEventListener('click', function()
         const recipeIngredients = recipes[recipe];
         const missingIngredients = recipeIngredients.filter(ingredient => !ingredients.includes(ingredient));
         if (recipeIngredients.every(ingredient => ingredients.includes(ingredient))) {
-            const recipeElement = document.createElement('article');
+            const recipeElement = document.createElement('div');
             recipeElement.classList.add('recipe');
             const img = document.createElement('img');
             img.src = recipeImages[recipe] || "https://via.placeholder.com/50";
@@ -77,7 +77,7 @@ document.getElementById('generate-recipes').addEventListener('click', function()
             recipeElement.appendChild(img);
             recipeElement.appendChild(text);
             recipeElement.addEventListener('click', () => {
-                showRecipeInstructions(recipe);
+                text.textContent = recipeInstructions[recipe];
             });
             recipesDiv.appendChild(recipeElement);
         } else if (missingIngredients.length <= 2) {
@@ -95,7 +95,7 @@ document.getElementById('generate-recipes').addEventListener('click', function()
             suggestionElement.appendChild(img);
             suggestionElement.appendChild(text);
             suggestionElement.addEventListener('click', () => {
-                showRecipeInstructions(recipe);
+                text.textContent = recipeInstructions[recipe];
             });
             additionalIngredientsDiv.appendChild(suggestionElement);
         }
