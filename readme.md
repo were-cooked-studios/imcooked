@@ -1,37 +1,18 @@
-# Foobar
+# I'M COOKED
 
-Foobar is a Python library for dealing with word pluralization.
+I'M COOKED is a recipe generating web app that makes generations based the ingredients YOU have at home.
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
-```bash
-pip install foobar
-```
+Just download the main folder and launch our index.html file.
 
 ## Usage
+1. Head to Recipe Roulette
+2. Add the ingredients you own to your virtual fridge—don't worry, these will be saved on your browser!
+3. Hit "Generate Recipes" and browse!
+4. Click on a recipe of your choosing and just follow the instructions. Bon Appetit!
 
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+## Credits
+Created June 2024 by Maheen Taher and Maximilian Koenigs
+maheentaher764@gmail.com
+maxkoenigs45@gmail.com
