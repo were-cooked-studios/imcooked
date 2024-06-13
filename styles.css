@@ -1,35 +1,276 @@
+body {
+    background-color: #665252;
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Droid Serif';
+    font-size: 21px; 
+    margin: 0;
+    padding: 0;
+}
+header {
+    color: #5465ff;
+    width: 100%;
+}
+img {
+    border: 1px solid #ffffff;
+}
+nav {
+    font-size: clamp(1.875rem, 0.966rem + 4.55vw, 4.375rem); 
+    font-family: 'Borel';
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+h2 {
+    font-size: clamp(0.625rem, 0.17rem + 2.27vw, 1.875rem);
+    font-family: 'Droid Serif';
+}
+footer {
+    background-color: #5465ff;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 18px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+.small {
+    font-size: 30px;
+}
+.space {
+    line-height: 60%;
+}
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Center items vertically */;
+    justify-content: center;
+}
+.align {
+    text-align: center;
+}
+.clipToLeft, .clipToRight {
+    border-radius: 10px;
+    flex: 1;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
-.fridge ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.fridge li {
+.main-container {
     display: flex;
     justify-content: space-between;
-    padding: 5px 0;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    margin: 20px auto;
 }
-
-.fridge li button {
-    background: red;
+.left, .right {
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+    margin: 10px;
+    
+}
+.left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #4d3a3a;
+    border: 4px solid #ff877d;
     color: white;
+}
+.left input {
+    margin: 10px 0;
+    padding: 10px;
+    width: 80%;
     border: none;
-    padding: 2px 5px;
+    border-radius: 5px;
+}
+.left button {
+    padding: 10px 20px;
+    background-color: #ffe78c;
+    color: #4d3a3a;
+    font-size: 18px;
+    border: 0px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.left ul {
+    list-style: none;
+    padding: 0px;
+    width: 100%;
+}
+.left li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background-color: #ff877d;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+.left li button {
+    background: none;
+    border: none;
+    color: rgb(116, 73, 73);
+    font-weight: bold;
     cursor: pointer;
 }
-
-#recipes, #additional-ingredients {
-    margin-top: 20px;
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #d3d3d3;
+    border: 4px solid #000000;
+    color: black;
+    text-align: left;
 }
-
 .recipe, .suggestion {
+    background-color: white;
+    color: #4d3a3a;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    color: blue;
-    text-decoration: underline;
+}
+.recipe img, .suggestion img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border: 1px solid black;
+}
+.small {
+    font-size: 30px;
+}
+.space {
+    line-height: 60%;
+}
+.container {
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Center items vertically */;
+    justify-content: center;
+}
+.align {
+    text-align: center;
+}
+.clipToRight {
+    text-align: right;
+}
+.clipToLeft {
+    text-align: left;
+}
+.button {
+    border: none;
+    color: white;
+    padding: 16px 0px;
+    margin: 0px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-family: 'Droid Serif';
+    width: clamp(2rem, 10rem, 15vw); /* Set a fixed width */
+}
+
+.headerbutton {
+    background-color: #665252; 
+    color: #ffffff; 
+    border: 2px solid #ff877d;
+}
+
+.headerbutton:hover {
+    background-color: #ff877d;
+    color: #ffe492;
+}
+
+.logoalignment {
+    margin-right: 150px; /* Adjust as needed */
+}
+/*accordion attempt*/
+/*accordion attempt*/
+/*accordion attempt
+
+
+*{
+box-sizing: border-box;
+font-family: Montserrat,sans-serif;
+}
+
+/* ---- Create Accordion --- 
+
+.accordion{ 
+max-width: 1080px;
+height: 250px;
+display: flex;
+overflow: hidden;
+margin: 50px auto;
+}
+
+.tab{
+position: relative;
+width: 20%;
+height: inherit;
+padding: 20px;
+background: #000;
+color: #FFF;
+cursor: pointer;
+transition: width .5s ease;
+}
+
+.tab img{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: all .5s ease;
+}
+
+.caption{
+position: absolute;
+z-index: 2;
+white-space: nowrap;
+top: 150px;
+opacity: 0;
+}
+
+.caption h2{
+margin-bottom: 2px;
+text-overflow:clip;
+font-size:24px;
+text-transform:uppercase;
+}
+
+.caption p{
+margin: 0;
+font-family: 'Open Sans';
+font-size: .9rem;
+}
+
+/* --- Hover Effects --- 
+
+.tab:hover img{
+opacity: .6;
+}
+
+.tab:hover{
+width: 80%;
+}
+
+.tab:hover .caption{
+transition: all .5s ease;
+opacity: 1;
 }

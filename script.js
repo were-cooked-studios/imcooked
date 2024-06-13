@@ -64,7 +64,7 @@ document.getElementById('generate-recipes').addEventListener('click', function()
         const recipeIngredients = recipes[recipe];
         const missingIngredients = recipeIngredients.filter(ingredient => !ingredients.includes(ingredient));
         if (recipeIngredients.every(ingredient => ingredients.includes(ingredient))) {
-            const recipeElement = document.createElement('div');
+            const recipeElement = document.createElement('article');
             recipeElement.classList.add('recipe');
             const img = document.createElement('img');
             img.src = recipeImages[recipe] || "https://via.placeholder.com/50";
