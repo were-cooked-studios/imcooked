@@ -11,9 +11,6 @@ header {
     color: #5465ff;
     width: 100%;
 }
-img {
-    border: 1px solid #ffffff;
-}
 nav {
     font-size: clamp(1.875rem, 0.966rem + 4.55vw, 4.375rem); 
     font-family: 'Borel';
@@ -29,14 +26,32 @@ h2 {
     font-family: 'Droid Serif';
 }
 footer {
-    background-color: #5465ff;
-    color: white;
+    background-color: #4d3a3a;
+    color: #ffffff;
     text-align: center;
     padding: 10px 0;
     font-size: 18px;
     width: 100%;
     position: fixed;
     bottom: 0;
+}
+footer a:link {
+    color: #ff877d;
+    background-color: transparent;
+}
+footer a:visited {
+    color: #ff877d;
+    background-color: transparent;
+}
+footer a:hover {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+}
+footer a:active {
+    color: white;
+    background-color: transparent;
+    text-decoration: underline;
 }
 .small {
     font-size: 30px;
@@ -52,10 +67,17 @@ footer {
 .align {
     text-align: center;
 }
+.heading-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    
+}
 .clipToLeft, .clipToRight {
-    border-radius: 10px;
     flex: 1;
-    margin: 10px;
+    padding-top: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,7 +89,6 @@ footer {
     justify-content: space-between;
     width: 100%;
     max-width: 1200px;
-    padding: 20px;
     margin: 20px auto;
 }
 .left, .right {
