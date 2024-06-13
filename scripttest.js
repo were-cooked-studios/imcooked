@@ -55,6 +55,13 @@ function updateIngredientList() {
     });
 }
 
+document.getElementById('clear-ingredients').addEventListener('click', function() {
+    ingredients.length = 0;
+    updateIngredientList();
+});
+//AOIDJOWIAJDOAIWJDOPWAJDAWDIJAWDJAWPDIAWDPOJAWDPOIJAWDPOI
+
+
 
 document.getElementById('generate-recipes').addEventListener('click', function() {
     recipesDiv.innerHTML = '';
@@ -81,7 +88,12 @@ document.getElementById('generate-recipes').addEventListener('click', function()
             const img = document.createElement('img');
             img.src = recipeImages[recipe] || "https://via.placeholder.com/50";
             const text = document.createElement('span');
-            text.textContent = `${recipe} (add ${missingIngredients[0]})`;
+            if (missingIngredients.length === 1){
+                text.textContent = `${recipe} (add ${missingIngredients[0]})`;
+            } else if (missingIngredients.length === 2){
+                text.textContent = `${recipe} (add ${missingIngredients[0]} and ${missingIngredients[1]})`;
+            }
+            
             suggestionElement.appendChild(img);
             suggestionElement.appendChild(text);
             suggestionElement.addEventListener('click', () => {
