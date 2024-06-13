@@ -1,6 +1,4 @@
-const SHEET_ID = '1UM8zCP-wjmAHEIdT7o7DOq92O5pruH5odHx88yKfo7g';  // Replace with your actual Google Sheet ID
-const API_KEY = 'AIzaSyDlteAC9zgCiRHZVVgXYLbL1UDdTTnnYsM';    // Replace with your actual API key
-const SHEET_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Sheet1?key=${API_KEY}`;
+const SHEET_URL = `https://sheets.googleapis.com/v4/spreadsheets/${"1UM8zCP-wjmAHEIdT7o7DOq92O5pruH5odHx88yKfo7g"}/values/Sheet1?key=${"AIzaSyDlteAC9zgCiRHZVVgXYLbL1UDdTTnnYsM"}`;
 
 let recipes = {};
 let recipeInstructions = {};
