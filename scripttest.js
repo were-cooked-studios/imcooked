@@ -9,6 +9,7 @@ const newIngredientInput = document.getElementById('new-ingredient');
 const recipesDiv = document.getElementById('recipes');
 const recipeInstructionsDiv = document.getElementById('recipe-instructions');
 const additionalIngredientsDiv = document.getElementById('additional-ingredients');
+const clearIngredientsButton = document.getElementById('clear-ingredients');
 let ingredients = [];
 
 window.addEventListener('load', () => {
@@ -16,6 +17,8 @@ window.addEventListener('load', () => {
     if (storedIngredients) {
         ingredients = JSON.parse(storedIngredients);
         updateIngredientList();
+        clearIngredientsButton.textContent = `Clear All Ingredients (${ingredients.length})`;
+
     }
 });
 
@@ -27,6 +30,7 @@ newIngredientInput.addEventListener('keypress', function(event) {
             updateIngredientList();
             //sets the localStorage to remember the list the user has inputted
             localStorage.setItem('ingredients', JSON.stringify(ingredients));
+            clearIngredientsButton.textContent = `Clear All Ingredients (${ingredients.length})`;
         }
         event.target.value = '';
     }
@@ -46,7 +50,7 @@ function updateIngredientList() {
         button.addEventListener('click', () => {
             ingredients.splice(index, 1);
             updateIngredientList();
-            
+            clearIngredientsButton.textContent = `Clear All Ingredients (${ingredients.length})`;
         });
         li.appendChild(button);
         ingredientList.appendChild(li);
@@ -105,6 +109,8 @@ document.getElementById('generate-recipes').addEventListener('click', function()
 function showRecipeInstructions(recipe) {
     recipeInstructionsDiv.textContent = recipeInstructions[recipe];
 }
+
+
 
 async function fetchRecipes() {
     try {

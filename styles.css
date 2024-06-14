@@ -7,10 +7,6 @@ body {
     margin: 0;
     padding: 0;
 }
-header {
-    color: #5465ff;
-    width: 100%;
-}
 nav {
     font-size: clamp(1.875rem, 0.966rem + 4.55vw, 4.375rem); 
     font-family: 'Borel';
@@ -22,48 +18,37 @@ nav {
     justify-content: center;
 }
 h2 {
-    font-size: clamp(0.625rem, 0.17rem + 2.27vw, 1.875rem);
+    font-size: clamp(0.625rem, 0.17rem + 2.27vw, 1.84rem);
     font-family: 'Droid Serif';
 }
-footer {
+footer{
     background-color: #4d3a3a;
     color: #ffffff;
     text-align: center;
     padding: 10px 0;
     font-size: 18px;
     width: 100%;
-    position: fixed;
     bottom: 0;
 }
-footer a:link {
+footer a:link, p a:link {
     color: #ff877d;
     background-color: transparent;
 }
-footer a:visited {
+footer a:visited, p a:visited {
     color: #ff877d;
     background-color: transparent;
 }
-footer a:hover {
+footer a:hover, p a:hover{
     color: yellow;
     background-color: transparent;
     text-decoration: underline;
 }
-footer a:active {
+footer a:active, p a:active {
     color: white;
     background-color: transparent;
     text-decoration: underline;
 }
-.small {
-    font-size: 30px;
-}
-.space {
-    line-height: 60%;
-}
-.container {
-    display: flex; /* Use flexbox layout */
-    align-items: center; /* Center items vertically */;
-    justify-content: center;
-}
+
 .align {
     text-align: center;
 }
@@ -72,7 +57,7 @@ footer a:active {
     justify-content: space-between;
     width: 100%;
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 0px auto;
     
 }
 .clipToLeft, .clipToRight {
@@ -89,7 +74,7 @@ footer a:active {
     justify-content: space-between;
     width: 100%;
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 0px auto;
 }
 .left, .right {
     padding: 20px;
@@ -106,6 +91,9 @@ footer a:active {
     background-color: #4d3a3a;
     border: 4px solid #ff877d;
     color: white;
+}
+.left p {
+    font-size: 20px;
 }
 .left input {
     margin: 10px 0;
@@ -147,19 +135,19 @@ footer a:active {
 .right {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     background-color: #d3d3d3;
     border: 4px solid #000000;
     color: black;
     text-align: left;
 }
-.recipe, .suggestion {
+.recipe, .suggestion{
     background-color: white;
     color: #4d3a3a;
     padding: 10px;
     border: 1px solid black;
     border-radius: 5px;
-    margin: 10px 0;
+    margin: 10px 0px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -167,7 +155,6 @@ footer a:active {
 
 }
 .recipe:hover, .suggestion:hover {
-    padding: 100px;
     background-color: #f0f0f0;
     cursor: pointer;
 }
@@ -177,15 +164,42 @@ footer a:active {
     height: 50px;
     margin-right: 15px;
     border: 1px solid black;
+    transition-duration: 0.4s;
 }
 .recipe:hover img, .suggestion:hover img {
-    width: 100px;   
-    height: 100px;
-
-    transition-duration: 0.4s;
+    width: 150px;   
+    height: 150px;
     background-color: #f0f0f0; /* Change background color on hover */
     cursor: pointer;
 }
+
+.siteinstructions {
+    background-color: white;
+    font-size: 20px;
+    color: #4d3a3a;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px 0px;
+    display: flex;
+    align-items: center;
+}
+.siteinstructions img {
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+    margin-right: 15px;
+    transition-duration: 0.4s;
+}
+
+.siteinstructions:hover img {
+    opacity: 1;
+    width: 150px;   
+    height: 150px;
+    background-color: #ffffff; /* Change background color on hover */
+}
+
+
 
 .small {
     font-size: 30px;
@@ -201,12 +215,7 @@ footer a:active {
 .align {
     text-align: center;
 }
-.clipToRight {
-    text-align: right;
-}
-.clipToLeft {
-    text-align: left;
-}
+
 .button {
     border: none;
     color: white;
@@ -235,80 +244,4 @@ footer a:active {
 
 .logoalignment {
     margin-right: 150px; /* Adjust as needed */
-}
-/*accordion attempt*/
-/*accordion attempt*/
-/*accordion attempt
-
-
-*{
-box-sizing: border-box;
-font-family: Montserrat,sans-serif;
-}
-
-/* ---- Create Accordion --- 
-
-.accordion{ 
-max-width: 1080px;
-height: 250px;
-display: flex;
-overflow: hidden;
-margin: 50px auto;
-}
-
-.tab{
-position: relative;
-width: 20%;
-height: inherit;
-padding: 20px;
-background: #000;
-color: #FFF;
-cursor: pointer;
-transition: width .5s ease;
-}
-
-.tab img{
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-object-fit: cover;
-transition: all .5s ease;
-}
-
-.caption{
-position: absolute;
-z-index: 2;
-white-space: nowrap;
-top: 150px;
-opacity: 0;
-}
-
-.caption h2{
-margin-bottom: 2px;
-text-overflow:clip;
-font-size:24px;
-text-transform:uppercase;
-}
-
-.caption p{
-margin: 0;
-font-family: 'Open Sans';
-font-size: .9rem;
-}
-
-/* --- Hover Effects --- 
-
-.tab:hover img{
-opacity: .6;
-}
-
-.tab:hover{
-width: 80%;
-}
-
-.tab:hover .caption{
-transition: all .5s ease;
-opacity: 1;
 }
