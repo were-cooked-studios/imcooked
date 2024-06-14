@@ -65,7 +65,7 @@ document.getElementById('clear-ingredients').addEventListener('click', function(
 document.getElementById('generate-recipes').addEventListener('click', function() {
     recipesDiv.innerHTML = '';
     additionalIngredientsDiv.innerHTML = '';
-    Object.keys(recipes).forEach(recipe => {
+    (Object.keys(recipes).sort((a, b) => a.localeCompare(b))).forEach(recipe => {
         const recipeIngredients = recipes[recipe];
         const missingIngredients = recipeIngredients.filter(ingredient => !ingredients.includes(ingredient));
         if (recipeIngredients.every(ingredient => ingredients.includes(ingredient))) {
