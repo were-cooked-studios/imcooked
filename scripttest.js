@@ -61,9 +61,6 @@ document.getElementById('clear-ingredients').addEventListener('click', function(
     ingredients.length = 0;
     updateIngredientList();
 });
-//AOIDJOWIAJDOAIWJDOPWAJDAWDIJAWDJAWPDIAWDPOJAWDPOIJAWDPOI
-
-
 
 document.getElementById('generate-recipes').addEventListener('click', function() {
     recipesDiv.innerHTML = '';
@@ -77,11 +74,11 @@ document.getElementById('generate-recipes').addEventListener('click', function()
             const img = document.createElement('img');
             img.src = recipeImages[recipe] || "https://via.placeholder.com/50";
             const text = document.createElement('span');
-            text.textContent = recipe;
+            text.innerHTML = recipe;
             recipeElement.appendChild(img);
             recipeElement.appendChild(text);
             recipeElement.addEventListener('click', () => {
-                text.textContent = recipeInstructions[recipe];
+                text.innerHTML = showRecipeInstructions(recipe);
             });
             recipesDiv.appendChild(recipeElement);
         } else if (missingIngredients.length <= 2) {
@@ -99,7 +96,7 @@ document.getElementById('generate-recipes').addEventListener('click', function()
             suggestionElement.appendChild(img);
             suggestionElement.appendChild(text);
             suggestionElement.addEventListener('click', () => {
-                text.textContent = recipeInstructions[recipe];
+                text.innerHTML = showRecipeInstructions(recipe);
             });
             additionalIngredientsDiv.appendChild(suggestionElement);
         }
@@ -107,9 +104,14 @@ document.getElementById('generate-recipes').addEventListener('click', function()
 });
 
 function showRecipeInstructions(recipe) {
-    recipeInstructionsDiv.textContent = recipeInstructions[recipe];
+    const recipeDetails = recipeInstructions[recipe];
+    const ingredientsPart = recipeDetails.split('. ')[0];
+    const instructionsPart = recipeDetails.split('. ').slice(1).join('. ');
+    
+    const ingredients = ingredientsPart.split('- ').filter(Boolean).map(instruction => `- ${instruction}`).join('<br>');
+    const instructions = instructionsPart.split('. ').filter(Boolean).map((instruction, index) => `${index + 1}. ${instruction}`).join('<br><br>');
+    return (recipe + (`${ingredients}<br><br>${instructions}`));
 }
-
 
 
 async function fetchRecipes() {
