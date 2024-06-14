@@ -110,7 +110,7 @@ function showRecipeInstructions(recipe) {
     
     const ingredients = ingredientsPart.split('- ').filter(Boolean).map(instruction => `- ${instruction}`).join('<br>');
     const instructions = instructionsPart.split('. ').filter(Boolean).map((instruction, index) => `${index + 1}. ${instruction}`).join('<br><br>');
-    return (recipe + ("<br><br>") + (`${ingredients}<br><br>${instructions}`));
+    return ((recipe.fontsize(5)).bold() + ("<br><br>") + (`${ingredients}<br><br>${instructions}`));
 }
 
 async function fetchRecipes() {
