@@ -293,3 +293,12 @@ footer a:active, p a:active {
     padding-top: 60px;
     margin-right: 150px; /* Adjust as needed */
 }
+
+#new-ingredient {
+    transition: background-color 0.2s ease;
+}
+
+/* This selector targets the placeholder text */
+#new-ingredient.alreadyadded::placeholder {
+    color:red
+}

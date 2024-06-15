@@ -27,12 +27,19 @@ class IngredientChef extends HeadChef {
     }
 
     addIngredient(ingredient) {
-        if (ingredient && !this.ingredients.includes(ingredient)) {
+        if (ingredient && this.ingredients.every(ing => ing.toUpperCase() !== ingredient.toUpperCase())) {
             this.ingredients.push(ingredient);
             this.updateIngredientList();
             localStorage.setItem('ingredients', JSON.stringify(this.ingredients));
             this.clearIngredientsButton.textContent = `Clear All Ingredients (${this.ingredients.length})`;
             this.log(`Added ingredient: ${ingredient}`);
+        }
+        else {
+            var inputField = document.getElementById("new-ingredient");
+            inputField.style.backgroundColor = "#ff877d";
+            inputField.classList.add('alreadyadded');
+            setTimeout(function() {
+            inputField.style.backgroundColor = "white"; inputField.classList.remove('alreadyadded');}, 200);
         }
     }
 
@@ -63,6 +70,7 @@ class IngredientChef extends HeadChef {
         this.ingredients = [];
         this.updateIngredientList();
         localStorage.setItem('ingredients', JSON.stringify(this.ingredients));
+        this.clearIngredientsButton.textContent = `Clear All Ingredients (${this.ingredients.length})`
     }
 }
 
@@ -103,7 +111,8 @@ class RecipesSousChef extends HeadChef {
         Object.keys(this.recipes).sort((a, b) => a.localeCompare(b)).forEach(recipe => {
             const recipeIngredients = this.recipes[recipe];
             const missingIngredients = recipeIngredients.filter(ingredient => !ingredients.includes(ingredient));
-            if (recipeIngredients.every(ingredient => ingredients.includes(ingredient))) {
+            if (recipeIngredients.every(ingredient => ingredients.map(ing => ing.toUpperCase()).includes(ingredient.toUpperCase())
+)) {
                 this.createRecipeElement(recipe);
             } else if (missingIngredients.length <= 2) {
                 this.createSuggestionElement(recipe, missingIngredients);
