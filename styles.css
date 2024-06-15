@@ -185,11 +185,13 @@ footer a:active, p a:active {
     border-radius: 5px;
     margin: 10px 0px;
     display: flex;
-    align-items: center;
     cursor: pointer;
     transition-duration: 0.4s;
 }
 
+.centeralign {
+    align-items: center;
+}
 .lineheight{
     line-height: 20px;
 }

@@ -123,23 +123,40 @@ class RecipesSousChef extends HeadChef {
         backbutton.src = "images/minimize.png";
         backbutton.style.cssText = 'width: 20px; height: 20px; border: 0px; padding-right: 10px; display: none';
 
-        recipeElement.appendChild(backbutton);
+        backbutton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            text.innerHTML = recipe;
+            recipeElement.classList.remove('expanded');
+            recipeElement.classList.add('centeralign');
+            backbutton.style.display = 'none';
+            recipeElement.dataset.showingInstructions = 'false';
+        });
+
+        
         recipeElement.appendChild(img);
         recipeElement.appendChild(text);
-        let showingInstructions = false;
+        recipeElement.dataset.showingInstructions = 'false';
+
         recipeElement.addEventListener('click', () => {
-            if (showingInstructions){
-                text.innerHTML = recipe;
-                recipeElement.classList.remove('expanded');
-                backbutton.style.display = 'none';
-            } else {
+            if (recipeElement.dataset.showingInstructions === 'false') {
                 text.innerHTML = this.showRecipeInstructions(recipe);
                 recipeElement.classList.add('expanded');
+                recipeElement.classList.remove('centeralign');
                 backbutton.style.display = 'block';
+                recipeElement.appendChild(backbutton);
+                recipeElement.dataset.showingInstructions = 'true';
             }
-            showingInstructions = !showingInstructions;
         });
+
         this.recipesDiv.appendChild(recipeElement);
+    }
+
+    setSuggestionText(textElement, recipe, missingIngredients) {
+        if (missingIngredients.length === 1) {
+            textElement.textContent = `${recipe} (add ${missingIngredients[0]})`;
+        } else if (missingIngredients.length === 2) {
+            textElement.textContent = `${recipe} (add ${missingIngredients[0]} and ${missingIngredients[1]})`;
+        }
     }
 
     createSuggestionElement(recipe, missingIngredients) {
@@ -148,25 +165,35 @@ class RecipesSousChef extends HeadChef {
         const img = document.createElement('img');
         img.src = this.recipeImages[recipe] || "https://via.placeholder.com/50";
         const text = document.createElement('span');
-        if (missingIngredients.length === 1){
-            text.textContent = `${recipe} (add ${missingIngredients[0]})`;
-        } else if (missingIngredients.length === 2){
-            text.textContent = `${recipe} (add ${missingIngredients[0]} and ${missingIngredients[1]})`;
-        }
-        
+        this.setSuggestionText(text, recipe, missingIngredients);
+        const backbutton = document.createElement('img');
+        backbutton.src = "images/minimize.png";
+        backbutton.style.cssText = 'width: 20px; height: 20px; border: 0px; padding-right: 10px; display: none';
+
+        backbutton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            this.setSuggestionText(text, recipe, missingIngredients);    
+            suggestionElement.classList.remove('expanded');
+            suggestionElement.classList.add('centeralign');
+            backbutton.style.display = 'none';
+            suggestionElement.dataset.showingInstructions = 'false';
+        });
+
         suggestionElement.appendChild(img);
         suggestionElement.appendChild(text);
-        let showingInstructions = false;
+        suggestionElement.dataset.showingInstructions = 'false';
+
         suggestionElement.addEventListener('click', () => {
-            if (showingInstructions){
-                text.innerHTML = recipe;
-                suggestionElement.classList.remove('expanded');
-            } else {
+            if (suggestionElement.dataset.showingInstructions === 'false') {
                 text.innerHTML = this.showRecipeInstructions(recipe);
                 suggestionElement.classList.add('expanded');
-            }
-            showingInstructions = !showingInstructions;
-        });
+                suggestionElement.classList.remove('centeralign');
+                backbutton.style.display = 'block';
+                suggestionElement.appendChild(backbutton);
+                suggestionElement.dataset.showingInstructions = 'true';
+        }
+    });
+
         this.additionalIngredientsDiv.appendChild(suggestionElement);
     }
 
@@ -174,7 +201,7 @@ class RecipesSousChef extends HeadChef {
         const recipeDetails = this.recipeInstructions[recipe];
         const ingredientsPart = recipeDetails.split('. ')[0];
         const instructionsPart = recipeDetails.split('. ').slice(1).join('. ');
-        
+
         const ingredients = ingredientsPart.split('- ').filter(Boolean).map(instruction => `- ${instruction}`).join('<br>');
         const instructions = instructionsPart.split('. ').filter(Boolean).map((instruction, index) => `${index + 1}. ${instruction}`).join('<br><br>');
         return ((recipe.fontsize(5)).bold() + ('<br><br>') + (`${ingredients}<br><br>${instructions}`).fontsize(3));
