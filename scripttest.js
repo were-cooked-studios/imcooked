@@ -119,10 +119,10 @@ class RecipesSousChef extends HeadChef {
         const text = document.createElement('span');
         text.innerHTML = recipe;
         text.classList.add('lineheight');
+        recipeElement.classList.add('centeralign');
         const backbutton = document.createElement('img');
         backbutton.src = "images/minimize.png";
         backbutton.style.cssText = 'width: 20px; height: 20px; border: 0px; padding-right: 10px; display: none';
-
         backbutton.addEventListener('click', (event) => {
             event.stopPropagation();
             text.innerHTML = recipe;
@@ -166,6 +166,7 @@ class RecipesSousChef extends HeadChef {
         img.src = this.recipeImages[recipe] || "https://via.placeholder.com/50";
         const text = document.createElement('span');
         this.setSuggestionText(text, recipe, missingIngredients);
+        suggestionElement.classList.add('centeralign');
         const backbutton = document.createElement('img');
         backbutton.src = "images/minimize.png";
         backbutton.style.cssText = 'width: 20px; height: 20px; border: 0px; padding-right: 10px; display: none';
