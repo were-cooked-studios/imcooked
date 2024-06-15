@@ -3,7 +3,7 @@ body {
     text-align: center;
     color: #ffffff;
     font-family: 'Droid Serif';
-    font-size: 21px; 
+    font-size: 30px; 
     margin: 0;
     padding: 0;
 }
@@ -16,6 +16,8 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 125px;
+
 }
 h2 {
     font-size: clamp(0.625rem, 0.17rem + 2.27vw, 1.84rem);
@@ -52,11 +54,12 @@ footer a:active, p a:active {
 .align {
     text-align: center;
 }
+
 .heading-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1350px;
     margin: 0px auto;
     
 }
@@ -73,7 +76,7 @@ footer a:active, p a:active {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1350px;
     margin: 0px auto;
 }
 .left, .right {
@@ -124,6 +127,8 @@ footer a:active, p a:active {
     background-color: #ff877d;
     margin: 5px 0;
     border-radius: 5px;
+    margin-inline: 20px;
+
 }
 .left li button {
     background: none;
@@ -132,6 +137,37 @@ footer a:active, p a:active {
     font-weight: bold;
     cursor: pointer;
 }
+
+.scrollable-list {
+    max-height: 300px; 
+    overflow-y: scroll;
+    padding: 5px;
+    margin-top: 10px;
+    list-style-type: none;
+    border: 5px solid #ff877d;
+}
+
+.scrollable-list li {
+    margin-bottom: 5px;
+    padding-block: 10px;
+}
+.scrollable-list::-webkit-scrollbar {
+    width: 12px; /* Adjust the width of the scrollbar */
+}
+
+.scrollable-list::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background of the scrollbar track */
+}
+
+.scrollable-list::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar handle */
+    border-radius: 10px; /* Round the corners of the scrollbar handle */
+}
+
+.scrollable-list::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color of the scrollbar handle on hover */
+}
+
 .right {
     display: flex;
     flex-direction: column;
@@ -141,7 +177,7 @@ footer a:active, p a:active {
     color: black;
     text-align: left;
 }
-.recipe, .suggestion{
+.recipe, .suggestion {
     background-color: white;
     color: #4d3a3a;
     padding: 10px;
@@ -152,7 +188,10 @@ footer a:active, p a:active {
     align-items: center;
     cursor: pointer;
     transition-duration: 0.4s;
+}
 
+.lineheight{
+    line-height: 20px;
 }
 .recipe:hover, .suggestion:hover {
     background-color: #f0f0f0;
@@ -160,8 +199,8 @@ footer a:active, p a:active {
 }
 
 .recipe img, .suggestion img {
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
     margin-right: 15px;
     border: 1px solid black;
     transition-duration: 0.4s;
@@ -171,6 +210,14 @@ footer a:active, p a:active {
     height: 150px;
     background-color: #f0f0f0; /* Change background color on hover */
     cursor: pointer;
+}
+
+.expanded {
+    cursor: default;
+}
+.expanded img{
+    width: 150px;   
+    height: 150px;
 }
 
 .siteinstructions {
@@ -204,9 +251,7 @@ footer a:active, p a:active {
 .small {
     font-size: 30px;
 }
-.space {
-    line-height: 60%;
-}
+
 .container {
     display: flex; /* Use flexbox layout */
     align-items: center; /* Center items vertically */;
@@ -228,7 +273,7 @@ footer a:active, p a:active {
     transition-duration: 0.4s;
     cursor: pointer;
     font-family: 'Droid Serif';
-    width: clamp(2rem, 10rem, 15vw); /* Set a fixed width */
+    width: clamp(2rem, 10rem, 15vw);
 }
 
 .headerbutton {
@@ -243,5 +288,6 @@ footer a:active, p a:active {
 }
 
 .logoalignment {
+    padding-top: 60px;
     margin-right: 150px; /* Adjust as needed */
 }

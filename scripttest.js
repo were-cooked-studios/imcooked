@@ -75,12 +75,30 @@ document.getElementById('generate-recipes').addEventListener('click', function()
             img.src = recipeImages[recipe] || "https://via.placeholder.com/50";
             const text = document.createElement('span');
             text.innerHTML = recipe;
+            text.classList.add('lineheight');
+            //minimizing button
+            const backbutton = document.createElement('img');
+            backbutton.src = "images/minimize.png";
+            backbutton.style.cssText = 'width: 20px; height: 20px; border: 0px; padding-right: 10px; display: none';
+            
+            recipeElement.appendChild(backbutton);
             recipeElement.appendChild(img);
             recipeElement.appendChild(text);
+            let showingInstructions = false;
             recipeElement.addEventListener('click', () => {
-                text.innerHTML = showRecipeInstructions(recipe);
+                if (showingInstructions){
+                    text.innerHTML = recipe;
+                    recipeElement.classList.remove('expanded');
+                    backbutton.style.display = 'none';
+                } else {
+                    text.innerHTML = showRecipeInstructions(recipe);
+                    recipeElement.classList.add('expanded');
+                    backbutton.style.display = 'block';
+                }
+                showingInstructions = !showingInstructions;
             });
             recipesDiv.appendChild(recipeElement);
+            
         } else if (missingIngredients.length <= 2) {
             const suggestionElement = document.createElement('div');
             suggestionElement.classList.add('suggestion');
@@ -95,13 +113,24 @@ document.getElementById('generate-recipes').addEventListener('click', function()
             
             suggestionElement.appendChild(img);
             suggestionElement.appendChild(text);
+            let showingInstructions = false;
             suggestionElement.addEventListener('click', () => {
-                text.innerHTML = showRecipeInstructions(recipe);
+                if (showingInstructions){
+                    text.innerHTML = recipe;
+                    suggestionElement.classList.remove('expanded');
+                } else {
+                    text.innerHTML = showRecipeInstructions(recipe);
+                    suggestionElement.classList.add('expanded');
+                }
+                showingInstructions = !showingInstructions;
             });
             additionalIngredientsDiv.appendChild(suggestionElement);
         }
     });
 });
+
+
+        
 
 function showRecipeInstructions(recipe) {
     const recipeDetails = recipeInstructions[recipe];
@@ -110,7 +139,7 @@ function showRecipeInstructions(recipe) {
     
     const ingredients = ingredientsPart.split('- ').filter(Boolean).map(instruction => `- ${instruction}`).join('<br>');
     const instructions = instructionsPart.split('. ').filter(Boolean).map((instruction, index) => `${index + 1}. ${instruction}`).join('<br><br>');
-    return ((recipe.fontsize(5)).bold() + ("<br><br>") + (`${ingredients}<br><br>${instructions}`));
+    return ((recipe.fontsize(5)).bold() + ('<br><br>') + (`${ingredients}<br><br>${instructions}`).fontsize(3));
 }
 
 async function fetchRecipes() {
