@@ -1,136 +1,221 @@
-const SHEET_URL = `https://sheets.googleapis.com/v4/spreadsheets/${"1UM8zCP-wjmAHEIdT7o7DOq92O5pruH5odHx88yKfo7g"}/values/Sheet1?key=${"AIzaSyDlteAC9zgCiRHZVVgXYLbL1UDdTTnnYsM"}`;
-
-let recipes = {};
-let recipeInstructions = {};
-let recipeImages = {};
-
-const ingredientList = document.getElementById('ingredient-list');
-const newIngredientInput = document.getElementById('new-ingredient');
-const recipesDiv = document.getElementById('recipes');
-const recipeInstructionsDiv = document.getElementById('recipe-instructions');
-const additionalIngredientsDiv = document.getElementById('additional-ingredients');
-const clearIngredientsButton = document.getElementById('clear-ingredients');
-let ingredients = [];
-
-window.addEventListener('load', () => {
-    const storedIngredients = localStorage.getItem('ingredients');
-    if (storedIngredients) {
-        ingredients = JSON.parse(storedIngredients);
-        updateIngredientList();
-        clearIngredientsButton.textContent = `Clear All Ingredients (${ingredients.length})`;
-
+class HeadChef {
+    log(message) {
+        console.log(message);
     }
-});
-
-newIngredientInput.addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
-        const ingredient = event.target.value.trim();
-        if (ingredient && !ingredients.includes(ingredient)) {
-            ingredients.push(ingredient);
-            updateIngredientList();
-            //sets the localStorage to remember the list the user has inputted
-            localStorage.setItem('ingredients', JSON.stringify(ingredients));
-            clearIngredientsButton.textContent = `Clear All Ingredients (${ingredients.length})`;
-        }
-        event.target.value = '';
-    }
-});
-
-function updateIngredientList() {
-    ingredientList.innerHTML = '';
-    //sorts alphabetically
-    ingredients.sort((a, b) => a.localeCompare(b));
-    ingredients.forEach((ingredient, index) => {
-        //list of ingredients user has inputted
-        const li = document.createElement('li');
-        li.textContent = ingredient.toUpperCase();
-        //delete item buttons
-        const button = document.createElement('button');
-        button.textContent = 'X';
-        button.addEventListener('click', () => {
-            ingredients.splice(index, 1);
-            updateIngredientList();
-            clearIngredientsButton.textContent = `Clear All Ingredients (${ingredients.length})`;
-        });
-        li.appendChild(button);
-        ingredientList.appendChild(li);
-    });
 }
 
-document.getElementById('clear-ingredients').addEventListener('click', function() {
-    ingredients.length = 0;
-    updateIngredientList();
-});
+class IngredientChef extends HeadChef {
+    constructor(ingredientListId, newIngredientInputId, clearIngredientsButtonId) {
+        super();
+        this.ingredients = JSON.parse(localStorage.getItem('ingredients')) || [];
+        this.ingredientList = document.getElementById(ingredientListId);
+        this.newIngredientInput = document.getElementById(newIngredientInputId);
+        this.clearIngredientsButton = document.getElementById(clearIngredientsButtonId);
+        this.updateIngredientList();
+        this.clearIngredientsButton.textContent = `Clear All Ingredients (${this.ingredients.length})`;
 
-document.getElementById('generate-recipes').addEventListener('click', function() {
-    recipesDiv.innerHTML = '';
-    additionalIngredientsDiv.innerHTML = '';
-    Object.keys(recipes).forEach(recipe => {
-        const recipeIngredients = recipes[recipe];
-        const missingIngredients = recipeIngredients.filter(ingredient => !ingredients.includes(ingredient));
-        if (recipeIngredients.every(ingredient => ingredients.includes(ingredient))) {
-            const recipeElement = document.createElement('div');
-            recipeElement.classList.add('recipe');
-            const img = document.createElement('img');
-            img.src = recipeImages[recipe] || "https://via.placeholder.com/50";
-            const text = document.createElement('span');
-            text.innerHTML = recipe;
-            recipeElement.appendChild(img);
-            recipeElement.appendChild(text);
-            recipeElement.addEventListener('click', () => {
-                text.innerHTML = showRecipeInstructions(recipe);
-            });
-            recipesDiv.appendChild(recipeElement);
-        } else if (missingIngredients.length <= 2) {
-            const suggestionElement = document.createElement('div');
-            suggestionElement.classList.add('suggestion');
-            const img = document.createElement('img');
-            img.src = recipeImages[recipe] || "https://via.placeholder.com/50";
-            const text = document.createElement('span');
-            if (missingIngredients.length === 1){
-                text.textContent = `${recipe} (add ${missingIngredients[0]})`;
-            } else if (missingIngredients.length === 2){
-                text.textContent = `${recipe} (add ${missingIngredients[0]} and ${missingIngredients[1]})`;
+        this.newIngredientInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                this.addIngredient(event.target.value.trim());
+                event.target.value = '';
             }
-            
-            suggestionElement.appendChild(img);
-            suggestionElement.appendChild(text);
-            suggestionElement.addEventListener('click', () => {
-                text.innerHTML = showRecipeInstructions(recipe);
-            });
-            additionalIngredientsDiv.appendChild(suggestionElement);
-        }
-    });
-});
-
-function showRecipeInstructions(recipe) {
-    const recipeDetails = recipeInstructions[recipe];
-    const ingredientsPart = recipeDetails.split('. ')[0];
-    const instructionsPart = recipeDetails.split('. ').slice(1).join('. ');
-    
-    const ingredients = ingredientsPart.split('- ').filter(Boolean).map(instruction => `- ${instruction}`).join('<br>');
-    const instructions = instructionsPart.split('. ').filter(Boolean).map((instruction, index) => `${index + 1}. ${instruction}`).join('<br><br>');
-    return (recipe + (`${ingredients}<br><br>${instructions}`));
-}
-
-
-async function fetchRecipes() {
-    try {
-        const response = await fetch(SHEET_URL);
-        const data = await response.json();
-        const rows = data.values;
-
-        // Skip the header row
-        rows.slice(1).forEach(row => {
-            const [recipe, ingredients, instructions, image] = row;
-            recipes[recipe] = ingredients.split(', ');
-            recipeInstructions[recipe] = instructions;
-            recipeImages[recipe] = image;
         });
-    } catch (error) {
-        console.error('Error fetching recipes:', error);
+
+        this.clearIngredientsButton.addEventListener('click', () => {
+            this.clearIngredients();
+        });
+    }
+
+    addIngredient(ingredient) {
+        if (ingredient && !this.ingredients.includes(ingredient)) {
+            this.ingredients.push(ingredient);
+            this.updateIngredientList();
+            localStorage.setItem('ingredients', JSON.stringify(this.ingredients));
+            this.clearIngredientsButton.textContent = `Clear All Ingredients (${this.ingredients.length})`;
+            this.log(`Added ingredient: ${ingredient}`);
+        }
+    }
+
+    removeIngredient(index) {
+        this.ingredients.splice(index, 1);
+        this.updateIngredientList();
+        localStorage.setItem('ingredients', JSON.stringify(this.ingredients));
+        this.clearIngredientsButton.textContent = `Clear All Ingredients (${this.ingredients.length})`;
+    }
+
+    updateIngredientList() {
+        this.ingredientList.innerHTML = '';
+        this.ingredients.sort((a, b) => a.localeCompare(b));
+        this.ingredients.forEach((ingredient, index) => {
+            const li = document.createElement('li');
+            li.textContent = ingredient.toUpperCase();
+            const button = document.createElement('button');
+            button.textContent = 'X';
+            button.addEventListener('click', () => {
+                this.removeIngredient(index);
+            });
+            li.appendChild(button);
+            this.ingredientList.appendChild(li);
+        });
+    }
+
+    clearIngredients() {
+        this.ingredients = [];
+        this.updateIngredientList();
+        localStorage.setItem('ingredients', JSON.stringify(this.ingredients));
     }
 }
 
-// Fetch recipes when the page loads
-fetchRecipes();
+class RecipesSousChef extends HeadChef {
+    constructor(sheetUrl, recipesDivId, additionalIngredientsDivId) {
+        super();
+        this.SHEET_URL = sheetUrl;
+        this.recipes = {};
+        this.recipeInstructions = {};
+        this.recipeImages = {};
+        this.recipesDiv = document.getElementById(recipesDivId);
+        this.additionalIngredientsDiv = document.getElementById(additionalIngredientsDivId);
+
+        this.fetchRecipes();
+    }
+
+    async fetchRecipes() {
+        try {
+            const response = await fetch(this.SHEET_URL);
+            const data = await response.json();
+            const rows = data.values;
+
+            rows.slice(1).forEach(row => {
+                const [recipe, ingredients, instructions, image] = row;
+                this.recipes[recipe] = ingredients.split(', ');
+                this.recipeInstructions[recipe] = instructions;
+                this.recipeImages[recipe] = image;
+                this.log(`Fetched recipe: ${recipe}`);
+            });
+        } catch (error) {
+            console.error('Error fetching recipes:', error);
+        }
+    }
+
+    generateRecipes(ingredients) {
+        this.recipesDiv.innerHTML = '';
+        this.additionalIngredientsDiv.innerHTML = '';
+        Object.keys(this.recipes).sort((a, b) => a.localeCompare(b)).forEach(recipe => {
+            const recipeIngredients = this.recipes[recipe];
+            const missingIngredients = recipeIngredients.filter(ingredient => !ingredients.includes(ingredient));
+            if (recipeIngredients.every(ingredient => ingredients.includes(ingredient))) {
+                this.createRecipeElement(recipe);
+            } else if (missingIngredients.length <= 2) {
+                this.createSuggestionElement(recipe, missingIngredients);
+            }
+        });
+    }
+
+    createRecipeElement(recipe) {
+        const recipeElement = document.createElement('div');
+        recipeElement.classList.add('recipe');
+        const img = document.createElement('img');
+        img.src = this.recipeImages[recipe] || "https://via.placeholder.com/50";
+        const text = document.createElement('span');
+        text.innerHTML = recipe;
+        text.classList.add('lineheight');
+        recipeElement.classList.add('centeralign');
+        const backbutton = document.createElement('img');
+        backbutton.src = "images/minimize.png";
+        backbutton.style.cssText = 'width: 20px; height: 20px; border: 0px; padding-right: 10px; display: none';
+        backbutton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            text.innerHTML = recipe;
+            recipeElement.classList.remove('expanded');
+            recipeElement.classList.add('centeralign');
+            backbutton.style.display = 'none';
+            recipeElement.dataset.showingInstructions = 'false';
+        });
+
+        
+        recipeElement.appendChild(img);
+        recipeElement.appendChild(text);
+        recipeElement.dataset.showingInstructions = 'false';
+
+        recipeElement.addEventListener('click', () => {
+            if (recipeElement.dataset.showingInstructions === 'false') {
+                text.innerHTML = this.showRecipeInstructions(recipe);
+                recipeElement.classList.add('expanded');
+                recipeElement.classList.remove('centeralign');
+                backbutton.style.display = 'block';
+                recipeElement.appendChild(backbutton);
+                recipeElement.dataset.showingInstructions = 'true';
+            }
+        });
+
+        this.recipesDiv.appendChild(recipeElement);
+    }
+
+    setSuggestionText(textElement, recipe, missingIngredients) {
+        if (missingIngredients.length === 1) {
+            textElement.textContent = `${recipe} (add ${missingIngredients[0]})`;
+        } else if (missingIngredients.length === 2) {
+            textElement.textContent = `${recipe} (add ${missingIngredients[0]} and ${missingIngredients[1]})`;
+        }
+    }
+
+    createSuggestionElement(recipe, missingIngredients) {
+        const suggestionElement = document.createElement('div');
+        suggestionElement.classList.add('suggestion');
+        const img = document.createElement('img');
+        img.src = this.recipeImages[recipe] || "https://via.placeholder.com/50";
+        const text = document.createElement('span');
+        this.setSuggestionText(text, recipe, missingIngredients);
+        suggestionElement.classList.add('centeralign');
+        const backbutton = document.createElement('img');
+        backbutton.src = "images/minimize.png";
+        backbutton.style.cssText = 'width: 20px; height: 20px; border: 0px; padding-right: 10px; display: none';
+
+        backbutton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            this.setSuggestionText(text, recipe, missingIngredients);    
+            suggestionElement.classList.remove('expanded');
+            suggestionElement.classList.add('centeralign');
+            backbutton.style.display = 'none';
+            suggestionElement.dataset.showingInstructions = 'false';
+        });
+
+        suggestionElement.appendChild(img);
+        suggestionElement.appendChild(text);
+        suggestionElement.dataset.showingInstructions = 'false';
+
+        suggestionElement.addEventListener('click', () => {
+            if (suggestionElement.dataset.showingInstructions === 'false') {
+                text.innerHTML = this.showRecipeInstructions(recipe);
+                suggestionElement.classList.add('expanded');
+                suggestionElement.classList.remove('centeralign');
+                backbutton.style.display = 'block';
+                suggestionElement.appendChild(backbutton);
+                suggestionElement.dataset.showingInstructions = 'true';
+        }
+    });
+
+        this.additionalIngredientsDiv.appendChild(suggestionElement);
+    }
+
+    showRecipeInstructions(recipe) {
+        const recipeDetails = this.recipeInstructions[recipe];
+        const ingredientsPart = recipeDetails.split('. ')[0];
+        const instructionsPart = recipeDetails.split('. ').slice(1).join('. ');
+
+        const ingredients = ingredientsPart.split('- ').filter(Boolean).map(instruction => `- ${instruction}`).join('<br>');
+        const instructions = instructionsPart.split('. ').filter(Boolean).map((instruction, index) => `${index + 1}. ${instruction}`).join('<br><br>');
+        return ((recipe.fontsize(5)).bold() + ('<br><br>') + (`${ingredients}<br><br>${instructions}`).fontsize(3));
+    }
+}
+
+// Main script initialization
+window.addEventListener('load', () => {
+    const ingredientChef = new IngredientChef('ingredient-list', 'new-ingredient', 'clear-ingredients');
+    const recipesSousChef = new RecipesSousChef(`https://sheets.googleapis.com/v4/spreadsheets/${"1UM8zCP-wjmAHEIdT7o7DOq92O5pruH5odHx88yKfo7g"}/values/Sheet1?key=${"AIzaSyDlteAC9zgCiRHZVVgXYLbL1UDdTTnnYsM"}`,
+        'recipes', 'additional-ingredients');
+
+    document.getElementById('generate-recipes').addEventListener('click', () => {
+        recipesSousChef.generateRecipes(ingredientChef.ingredients);
+    });
+});
