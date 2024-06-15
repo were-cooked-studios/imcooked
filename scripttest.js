@@ -176,6 +176,7 @@ class RecipesSousChef extends HeadChef {
             this.setSuggestionText(text, recipe, missingIngredients);    
             suggestionElement.classList.remove('expanded');
             suggestionElement.classList.add('centeralign');
+            suggestionElement.classList.remove('lineheight');
             backbutton.style.display = 'none';
             suggestionElement.dataset.showingInstructions = 'false';
         });
@@ -189,6 +190,7 @@ class RecipesSousChef extends HeadChef {
                 text.innerHTML = this.showRecipeInstructions(recipe);
                 suggestionElement.classList.add('expanded');
                 suggestionElement.classList.remove('centeralign');
+                suggestionElement.classList.add('lineheight');
                 backbutton.style.display = 'block';
                 suggestionElement.appendChild(backbutton);
                 suggestionElement.dataset.showingInstructions = 'true';
