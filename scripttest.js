@@ -202,7 +202,7 @@ class RecipesSousChef extends HeadChef {
         suggestionElement.classList.add('centeralign');
         const backbutton = document.createElement('img');
         backbutton.src = "images/minimize.png";
-        backbutton.style.cssText = 'width: 20px; height: 20px; border: 0px; padding-right: 10px; display: none';
+        backbutton.style.cssText = 'width: 20px; height: 20px; border: 0px; padding-right: 10px; alt: minimize recipe button;display: none';
 
         //so I can also minimize the intructions list 
         backbutton.addEventListener('click', (event) => {
